@@ -1,0 +1,45 @@
+Project MyTest is
+   ----------------
+   -- Attributes --
+   ----------------   
+   -- set the library name
+   for Library_Name use "mytest";
+
+   for Languages use ("Ada", "C++");
+   
+   for Source_Dirs use ("./include", "./src");
+   --  The list of directories where the source files are to be looked
+   --  for. Once again, we can specify any number of these.
+
+   for Object_Dir use "./build";
+   --  The directory where all .o and .ali files are placed. The rule is
+   --  that any project has only one Object_Dir attribute. Note that we
+   --  don't use an array of strings here, but on ly a string.
+
+   for Exec_Dir use "./build";
+   --  the directory where the final executable is copied. If missing 
+   --  uses the Object_Dir attribute.
+
+   -- set the library path
+   for Library_Dir use "./lib";
+
+   -- set the library type
+   for Library_Kind use "dynamic";
+
+
+   --------------
+   -- Packages --
+   --------------
+   package Compiler is
+      for Default_Switches ("Ada") use ("-O2", "-gnat05", "-gnatwcfkmruv");
+      --  This attributes contains the switches used by default for the Ada
+      --  subprograms
+   end Compiler;
+
+   package Builder is
+      --  This attribute contains the switches used for "main" only
+        for Default_Switches ("Ada") use ("-g");
+   end Builder;
+
+end MyTest;
+
